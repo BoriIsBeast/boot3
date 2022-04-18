@@ -18,7 +18,13 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
-	
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <!-- 버전 삭제 -->
+		    <scope>provided</scope>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper -->
 		<dependency>
 		    <groupId>org.apache.tomcat.embed</groupId>
