@@ -60,6 +60,24 @@
 					</c:forEach>
 					</tbody>
 		</table>
+		
+		
+		
+		
+		</div>
+		
+		<div>
+		<c:if test="${pager.pre}">
+				<a href="./list?pn=${pager.pre?pager.startNum-1:1}&kind=${pager.kind}&search=${pager.search}">PREVIEW</a>
+			</c:if>
+		
+			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+				<a href="./list?pn=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a>
+			</c:forEach>
+			
+			<c:if test="${pager.next}">
+				<a href="./list?pn=${pager.next?pager.lastNum+1:pager.lastNum}&kind=${pager.kind}&search=${pager.search}">NEXT</a>
+			</c:if>
 		</div>
 		
 		<div class="row col-1 justyfy-content-end">

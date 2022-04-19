@@ -8,5 +8,6 @@
   		<typeAlias type="com.iu.boot3.board.BoardVO" alias="BoardVO"/>
   		<typeAlias type="com.iu.boot3.board.BoardFilesVO" alias="BoardFilesVO"/>
   		<typeAlias type="com.iu.boot3.util.Pager" alias="Pager"/>
+  		<typeAlias type="java.lang.Long" alias="Long"/>
   	</typeAliases>
   </configuration>

@@ -26,6 +26,9 @@ public interface BoardMapper {
 	//detail : getDetail
 	public BoardVO getDetail(BoardVO boardVO)throws Exception;
 	
+	//totalCount
+	public Long GetTotalCount(Pager pager)throws Exception;
+	
 	//list : getList
 	public List<BoardVO> getList(Pager pager)throws Exception;
 	
