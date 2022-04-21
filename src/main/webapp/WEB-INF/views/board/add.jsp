@@ -8,10 +8,14 @@
 </head>
 <body>
 	 
-	<form action="./add" method="POST">
+	<form action="./add" method="POST" enctype="multipart/form-data">
 		title<input type="text" name="title">
 		writer<input type="text" name="writer">
 		contents<input type="text" name="contents">
+		<div>
+		File<input type="file"name="files">
+		File<input type="file"name="files">
+		</div>
 		<button type="submit">Add</button>
 	</form>
 </body>

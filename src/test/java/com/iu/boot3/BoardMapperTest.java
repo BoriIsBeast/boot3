@@ -12,7 +12,7 @@ import com.iu.boot3.board.BoardFilesVO;
 import com.iu.boot3.board.BoardMapper;
 import com.iu.boot3.board.BoardVO;
 import com.iu.boot3.util.Pager;
-@SpringBootTest
+@SpringBootTest 
 class BoardMapperTest {
 	
 	@Autowired
@@ -69,7 +69,7 @@ class BoardMapperTest {
 	}
 	
 	
-	@Test
+	//@Test
 	void listTest()throws Exception{
 		Pager pager = new Pager();
 		pager.makeRow();
@@ -79,10 +79,10 @@ class BoardMapperTest {
 		System.out.println(ar);
 		assertEquals(10, ar.size());
 	}
-	//@Test
-	void test() throws Exception {
+	@Test
+	void detailtest() throws Exception {
 		BoardVO boardVO = new BoardVO();
-		boardVO.setNum(3L);
+		boardVO.setNum(110L);
 		boardVO = boardMapper.getDetail(boardVO);
 		System.out.println(boardVO.toString());
 		assertNotNull(boardVO);

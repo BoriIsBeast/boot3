@@ -1,12 +1,15 @@
 package com.iu.boot3.board;
 
+import com.iu.boot3.util.FileVO;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class BoardFilesVO {
+@EqualsAndHashCode(callSuper = false)
+public class BoardFilesVO extends FileVO{
 	
-	private Long fileNum;
+	
 	private Long num;
-	private String fileName;
-	private String oriName;
+	
 }
