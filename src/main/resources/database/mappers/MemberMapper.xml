@@ -26,17 +26,40 @@
 		WHERE ID = #{id}
 	</update>
 	
+	<insert id="setRoleAdd" parameterType="Map">
+		INSERT INTO MEMBERROLE (ID, ROLEID)
+		VALUES (#{id}, (SELECT ROLEID FROM ROLE WHERE ROLENAME = #{roleName}))
+	</insert>
+	
 	<insert id="setJoin" parameterType="MemberVO">
 		INSERT INTO MEMBER(ID, PW, NAME, EMAIL, PHONE)
 		VALUES (#{id}, #{pw}, #{name}, #{email}, #{phone})
 	</insert>
 	
-	<select id="getLogin" parameterType="MemberVO" resultType="MemberVO">
-		SELECT * FROM MEMBER
-		WHERE ID=#{id} and PW=#{pw}
+	<select id="getLogin" parameterType="MemberVO" resultMap="getLoginResult">
+		<!-- SELECT * FROM MEMBER WHERE ID=#{id} and PW=#{pw} -->
+		
+		SELECT ID,M.NAME, R.ROLENAME
+		FROM 
+			MEMBER M
+			INNER JOIN
+			MEMBERROLE MR 
+			USING(ID)
+			INNER JOIN
+			ROLE R 
+			USING(ROLEID)
+			WHERE ID = #{id} and M.PW = #{pw}
 	</select>
 	
-	<select id="getMyPage" parameterType="MemberVO" resultType="MemberVO">
+	<resultMap type="MemberVO" id="getLoginResult">
+		<id column="ID" property="id"/>
+		<result column="NAME" property="name"/>
+		<collection property="roleVOs" javaType="List" ofType="RoleVO">
+			<result column="ROLENAME" property="roleName"/>
+		</collection>
+	</resultMap>
+	
+	<select id="getMyPage" parameterType="MemberVO" resultMap="getDetailResult">
 		SELECT M.NAME, M.EMAIL, M.PHONE, F.* 
 		FROM MEMBER M
 			LEFT JOIN

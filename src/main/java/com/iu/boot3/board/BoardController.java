@@ -71,13 +71,37 @@ public class BoardController {
 		return mv;
 	}
 	
-	@PostMapping("update")
-	public ModelAndView setUpdate(BoardVO boardVO)throws Exception{
+	@PostMapping("fileDelete")
+	public ModelAndView setFileDelete(BoardFilesVO boardFilesVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		int result = boardService.setUpdate(boardVO);
+		int result = boardService.setFileDelete(boardFilesVO);
 		
-		mv.setViewName("redirect:./list");
+		mv.setViewName("common/result");
+		mv.addObject("result", result);
+		
+		return mv;
+	}
+	
+	@PostMapping("update")
+	public ModelAndView setUpdate(BoardVO boardVO, MultipartFile[] files)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		for(int i = 0; i<files.length;i++) {
+			System.out.println(files[i].getOriginalFilename());
+		}
+		
+		int result = boardService.setUpdate(boardVO, files);
+		if(result>0) {
+			mv.setViewName("redirect:./list");
+		}else {
+			mv.setViewName("common/getResult");
+			mv.addObject("msg", "Update 실패");
+			mv.addObject("path", "./detail?num="+boardVO.getNum());
+		}
+		
+		
+		
 		return mv;
 	}
 	

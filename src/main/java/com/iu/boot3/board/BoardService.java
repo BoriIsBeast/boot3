@@ -39,8 +39,42 @@ public class BoardService {
 		return boardMapper.getFileDetail(boardFilesVO);
 	}
 	
-	public int setUpdate(BoardVO boardVO)throws Exception{
-		return boardMapper.setUpdate(boardVO);
+	public int setFileDelete(BoardFilesVO boardFilesVO)throws Exception{
+		
+		boardFilesVO = boardMapper.getFileDetail(boardFilesVO);
+		
+		int check = boardMapper.setFileDelete(boardFilesVO);
+		
+		if(check>0) {
+			boolean result = fileManager.remove("/resources/upload/board/", boardFilesVO.getFileName());
+		}
+		
+		return check;
+	}
+	
+	public int setUpdate(BoardVO boardVO, MultipartFile [] multipartFiles)throws Exception{
+		int result =  boardMapper.setUpdate(boardVO);
+		
+		if(multipartFiles != null) {
+			
+			for(MultipartFile multipartFile : multipartFiles) {
+				if(multipartFile.isEmpty()) {
+					continue;
+				}
+				BoardFilesVO boardFilesVO = new BoardFilesVO();
+				String fileName = fileManager.filesave(multipartFile, "/resources/upload/board/");
+				boardFilesVO.setFileName(fileName);
+				boardFilesVO.setOriName(multipartFile.getOriginalFilename());
+				boardFilesVO.setNum(boardVO.getNum());
+				result = boardMapper.setFileAdd(boardFilesVO);
+				
+				
+			}
+			
+		}
+		
+		return result;
+		
 	}
 	
 	public int setDelete(BoardVO boardVO)throws Exception{

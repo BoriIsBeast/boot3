@@ -21,6 +21,8 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
+	<div class="container">
+	
 	<div class="row" id="list">
 	<!-- 삼품 리스트 ajax, name, price, count -->
 		
@@ -28,19 +30,38 @@
 	
 	 
 	<form action="./add" method="POST" enctype="multipart/form-data">
-		Name<input type="text" name="productName"id="productName">
-		Price<input type="text" name="productPrice" id="productPrice">
-		Count<input type="text" name="productCount" id="productCount">
+		<div>Name<input type="text" name="productName"id="productName"></div>
+		<div>Price<input type="text" name="productPrice" id="productPrice"></div>
+		<div>Count<input type="text" name="productCount" id="productCount"></div>
 		Detail<textarea rows="" cols="" name="productDetail" id="productDetail"></textarea>
 		
+		<div class="row mb-3">
+		<div class="form-check">
+			  <input class="form-check-input sale" type="radio" value="1" name="sale" id="flexRadioDefault1">
+			  <label class="form-check-label" for="flexRadioDefault1">
+			    판매
+			  </label>
+			</div>
+			<div class="form-check">
+			  <input class="form-check-input sale" type="radio" value="0" name="sale" id="flexRadioDefault2" checked>
+			  <label class="form-check-label" for="flexRadioDefault2">
+			    판매중지
+			  </label>
+			</div>
+		
+		</div>
 		
 		<button id="fileAdd" type="button" class="btn btn-danger d-block">FileAdd</button>
 		<div id="fileResult"></div>
 		
 		<button id="add" type="button">작성하기</button>
 	</form>
-	
+	</div>
+	<script type="text/javascript" src="../resources/js/fileAdd.js"></script>
+	<script type="text/javascript" src="../js/summernote.js"></script>
 	<script type="text/javascript">
+		summernoteInit("productDetail", "");
+	
 	//
 	let pn =1;
 	$("#list").on("click", ".pager", function(){
@@ -80,6 +101,13 @@
 			let productPrice = $("#productPrice").val();
 			let productCount = $("#productCount").val();
 			let productDetail = $("#productDetail").summernote("code"); //$("#productDetail").val();
+			let sale =0;
+			$(".sale").each(function(idx, item){
+				if($(item).prop("checked")){
+					sale = $(item).val();
+				}
+			})
+			
 			$(".files").each(function(idx, item){
 				if(item.files.length>0){
 				console.log(idx);                     //index번호
@@ -97,6 +125,7 @@
 			formData.append("productPrice", productPrice);
 			formData.append("productCount", productCount);
 			formData.append("productDetail", productDetail);
+			formData.append("sale", sale);
 			
 			 $.ajax({
 				type:"POST",
@@ -131,35 +160,7 @@
 		});
 		
 	
-		//summernote
-		  $('#productDetail').summernote({
-			  
-			  height:400
-		  });
 		
-	
-	
-		let count = 0;	
-	
-	
-		$("#fileAdd").click(function(){
-			if(count>4){
-				alert('최대 5개');
-				return;
-			}
-			
-			let result = '<div class="input-group">'
-			 result = result + '<input name="files" type="file" class="form-control files" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">';
-			 result = result + '<button class="btn btn-outline-secondary del" type="button" id="inputGroupFileAddon04">X</button>';
-			 result = result + '</div>';
-			$("#fileResult").append(result);
-			count++;
-		});
-		
-		$("#fileResult").on("click", ".del", function(){
-			$(this).parent().remove();
-			count--;
-		});
 	
 	</script>
 </body>

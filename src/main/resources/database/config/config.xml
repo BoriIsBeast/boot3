@@ -13,5 +13,8 @@
   		<typeAlias type="com.iu.boot3.member.MemberFilesVO" alias="MemberFilesVO"/>
   		<typeAlias type="com.iu.boot3.product.ProductVO" alias="ProductVO"/>
   		<typeAlias type="com.iu.boot3.product.ProductFilesVO" alias="ProductFilesVO"/>
+  		<typeAlias type="java.util.Map"	alias="Map"/>
+  		<typeAlias type="java.util.List" alias="List"/>
+  		<typeAlias type="com.iu.boot3.member.RoleVO" alias="RoleVO"/>
   	</typeAliases>
   </configuration>

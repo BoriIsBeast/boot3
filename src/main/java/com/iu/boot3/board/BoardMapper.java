@@ -9,6 +9,7 @@ import com.iu.boot3.util.Pager;
 @Mapper
 public interface BoardMapper {
 	
+	
 	//listFile
 	public List<BoardFilesVO> listFile(BoardVO boardVO)throws Exception;
 	
