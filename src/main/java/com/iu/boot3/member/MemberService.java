@@ -22,6 +22,12 @@ public class MemberService {
 	@Value("${member.role.member}")
 	private String memberRole;
 	
+	//아이디 찾기
+	public MemberVO getFindId(MemberVO memberVO)throws Exception{
+		
+		return memberMapper.getFindId(memberVO);
+	}
+	
 	//mypage
 	public MemberVO getMypage(MemberVO memberVO)throws Exception{
 		

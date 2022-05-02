@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +19,29 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@PostMapping("findId")
+	public ModelAndView getFindId(MemberVO memberVO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		memberVO = memberService.getFindId(memberVO);
+		mv.addObject("idResult", memberVO);
+		mv.setViewName("member/findIdResult");
+		
+		
+		return mv;
+	}
+	
+	//아이디 찾기
+	@GetMapping("findId")
+	public ModelAndView getFindId()throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("member/findId");
+		
+		
+		return mv;
+	}
+	
 	
 	@PostMapping("update")
 	public ModelAndView setUpdate(MemberVO memberVO)throws Exception{
@@ -87,8 +111,11 @@ public class MemberController {
 	
 	
 	@GetMapping("login")
-	public ModelAndView getLogin()throws Exception{
+	public ModelAndView getLogin(@ModelAttribute MemberVO memberVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
+		
+		//mv.addObject("vo", new MemberVO());
+		
 		mv.setViewName("member/login");
 		return mv;
 		

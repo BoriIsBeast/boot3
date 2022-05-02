@@ -1,81 +1,122 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 
 
 <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
 <title>Insert title here</title>
 </head>
 <body>
-<!--  header -->
+	<!--  header -->
 	<c:import url="./temp/header.jsp"></c:import>
 	<div class="container mt-4">
 		<c:if test="${not empty member}">
-		<h1>${member.name}님 반갑습니다!</h1>
-		
+			<h1>${member.name}님반갑습니다!</h1>
+
 		</c:if>
-		
-		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-			  <div class="carousel-indicators">
-			    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-			    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-			    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-			  </div>
-			  <div class="carousel-inner">
-			    <div class="carousel-item active">
-			      <img src="https://fncent.com/files/2022/02/23/95c2c0687206848f8f867241a1115b1a180649.jpg" class="d-block w-100" alt="...">
-			    </div>
-			    <div class="carousel-item">
-			      <img src="https://fncent.com/files/2022/02/23/c1ef220da543b3d053290efcb3dd2581180649.jpg" class="d-block w-100" alt="...">
-			    </div>
-			    <div class="carousel-item">
-			      <img src="https://fncent.com/files/2022/02/23/875ea9925cc4988746519d241fd2b78a180649.jpg" class="d-block w-100" alt="...">
-			    </div>
-			  </div>
-			  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			    <span class="visually-hidden">Previous</span>
-			  </button>
-			  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-			    <span class="visually-hidden">Next</span>
-			  </button>
+
+		<div id="carouselExampleIndicators" class="carousel slide"
+			data-bs-ride="carousel">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="0" class="active" aria-current="true"
+					aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="2" aria-label="Slide 3"></button>
 			</div>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img
+						src="https://fncent.com/files/2022/02/23/95c2c0687206848f8f867241a1115b1a180649.jpg"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img
+						src="https://fncent.com/files/2022/02/23/c1ef220da543b3d053290efcb3dd2581180649.jpg"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img
+						src="https://fncent.com/files/2022/02/23/875ea9925cc4988746519d241fd2b78a180649.jpg"
+						class="d-block w-100" alt="...">
+				</div>
+			</div>
+			<button class="carousel-control-prev" type="button"
+				data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button"
+				data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
 		</div>
-		
-		<div class="container">
-			<c:if test="${not empty member}">
-				<c:forEach items="${member.roleVOs}" var="vo">
+	</div>
+
+	<div class="container">
+		<c:if test="${not empty member}">
+			<c:forEach items="${member.roleVOs}" var="vo">
 				<h3>${vo.roleName}</h3>
-				</c:forEach>
-			</c:if>
-		
-		</div>
-		
-		
-		<div class="container">
-		
-		<input type="text" id="v1">	
-		
-		<input type="checkbox" class="num" name="num" value="a">
-		<input type="checkbox" class="num" name="num" value="b">
-		<input type="checkbox" class="num" name="num" value="c">
-		<input type="checkbox" class="num" name="num" value="d">
-		
+			</c:forEach>
+		</c:if>
+
+	</div>
+
+
+	<div class="container">
+
+		<input type="text" id="v1"> <input type="checkbox" class="num"
+			name="num" value="a"> <input type="checkbox" class="num"
+			name="num" value="b"> <input type="checkbox" class="num"
+			name="num" value="c"> <input type="checkbox" class="num"
+			name="num" value="d">
+
 		<button id="btn1">GET</button>
 		<button id="btn2">Post</button>
 		<button id="btn3">ajax</button>
-		
-		</div>
-		
+
+	</div>
+
+	<div class="container">
+		<h1>Spring Message</h1>
+		<h1>
+			<spring:message code="hello" var="m"></spring:message>
+		</h1>
+		<h1>
+			<spring:message code="test" text="기본메세지"></spring:message>
+		</h1>
+		<h1>${m}</h1>
+		<h2>${m}</h2>
+		<h1>
+			<spring:message code="board.title"></spring:message>
+		</h1>
+
+
+		<c:if test="${not empty member}">
+			<!-- 회원의아이디 님 환영합니다. 이메일주소는 000입니다  -->
+			<h1>
+				<spring:message code="member.id.info" arguments="${member.id}"></spring:message>
+			</h1>
+		</c:if>
+
+	</div>
+
 	<c:import url="./temp/header_script.jsp"></c:import>
 	<script type="text/javascript">
 	
