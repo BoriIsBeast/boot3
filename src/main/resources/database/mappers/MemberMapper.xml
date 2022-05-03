@@ -6,6 +6,10 @@
 
 <mapper namespace="com.iu.boot3.member.MemberMapper">
 
+	<select id="getId" parameterType="MemberVO" resultType="MemberVO">
+		SELECT ID FROM MEMBER WHERE ID=#{id}
+	</select>
+
 	<select id="getFindId" parameterType="MemberVO" resultType="MemberVO">
 		SELECT ID FROM MEMBER WHERE EMAIL=#{email}
 	</select>

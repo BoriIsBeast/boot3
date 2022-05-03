@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,12 +21,33 @@
 </head>
 <body>
 	<c:import url="../temp/header.jsp"></c:import>
-	<form action="./join" method="POST" enctype="multipart/form-data">
-		ID<input type="text" name="id"> 
-		PW<input type="text" name="pw">
-		NAME<input type="text" name="name"> 
-		EMAIL<input type="text"name="email"> 
-		PHONE<input type="text" name="phone">
+	
+	<!-- <form action="./join" method="POST" enctype="multipart/form-data"> -->
+		<form:form modelAttribute="memberVO" method="POST" enctype="multipart/form-data">
+		
+		ID<form:input path="id" id="id"/>
+		<div>
+			<form:errors path="id"></form:errors>
+		</div>
+		
+		PW<form:password path="pw" id="pw"/>
+		<div>
+			<form:errors path="pw"></form:errors>
+		</div>
+		PWCheck<form:password path="checkPw" id="checkPw"/>
+		<div>
+			<form:errors path="checkPw"></form:errors>
+		</div>
+		
+		NAME<form:input path="name" id="name"/>
+		<div>
+			<form:errors path="name"></form:errors>
+		</div>
+		EMAIL<form:input path="email" id="email"/>
+		<div>
+			<form:errors path="email"></form:errors>
+		</div> 
+		PHONE<form:input path="phone" id="phone"/>
 
 
 		<div>
@@ -33,8 +55,9 @@
 
 		</div>
 		<button type="submit">Add</button>
-
-	</form>
+	
+	<!-- </form> -->
+	</form:form>
 
 	<div class="row mt-4">
 		<div class="form-check">

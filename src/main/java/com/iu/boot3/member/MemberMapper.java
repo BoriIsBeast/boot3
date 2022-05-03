@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Mapper
 public interface MemberMapper {
 	
+	public MemberVO getId(MemberVO memberVO)throws Exception;
+	
 	//아이디 조회
 	public MemberVO getFindId(MemberVO memberVO)throws Exception;
 	

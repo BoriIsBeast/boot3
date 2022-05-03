@@ -1,9 +1,12 @@
 package com.iu.boot3.member;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -94,8 +97,13 @@ public class MemberController {
 	}
 	
 	@PostMapping("login")
-	public ModelAndView getLogin(MemberVO memberVO,HttpSession session)throws Exception{
+	public ModelAndView getLogin(MemberVO memberVO, HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
+		
+		/*
+		 * if(bindingResult.hasErrors()) { System.out.println("로그인성공 : "
+		 * +memberVO.getId()); mv.setViewName("member/login"); return mv; }
+		 */
 		memberVO = memberService.getLogin(memberVO);
 		
 		mv.setViewName("member/login");
@@ -122,8 +130,18 @@ public class MemberController {
 	}
 	
 	@PostMapping("join")
-	public ModelAndView setJoin(MemberVO memberVO, MultipartFile file)throws Exception{
+	public ModelAndView setJoin(@Valid MemberVO memberVO,BindingResult bindingResult, MultipartFile file)throws Exception{
 		ModelAndView mv = new ModelAndView();
+		
+		/*
+		 * if(bindingResult.hasErrors()) { mv.setViewName("member/join"); return mv; }
+		 */		
+		
+		//사용자 정의 검증 메서드 호출
+		if(memberService.memberError(memberVO, bindingResult)) {
+			 mv.setViewName("member/join"); 
+			 return mv; 
+		}
 		
 		int result = memberService.setJoin(memberVO,file);
 		
@@ -133,7 +151,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("join")
-	public void setJoin()throws Exception{
+	public void setJoin(@ModelAttribute MemberVO memberVO)throws Exception{
 		
 		
 	}

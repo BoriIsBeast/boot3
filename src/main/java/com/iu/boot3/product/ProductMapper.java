@@ -9,6 +9,8 @@ import com.iu.boot3.util.Pager;
 @Mapper
 public interface ProductMapper {
 	
+
+	
 	
 	public int setUpdate(ProductVO productVO)throws Exception;
 	

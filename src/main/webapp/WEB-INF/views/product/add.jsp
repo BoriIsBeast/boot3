@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><!-- form으로 해야됨 spring 아님  -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,14 +30,36 @@
 	</div>
 	
 	 
-	<form action="./add" method="POST" enctype="multipart/form-data">
-		<div>Name<input type="text" name="productName"id="productName"></div>
-		<div>Price<input type="text" name="productPrice" id="productPrice"></div>
-		<div>Count<input type="text" name="productCount" id="productCount"></div>
-		Detail<textarea rows="" cols="" name="productDetail" id="productDetail"></textarea>
+	<!-- <form action="./add" method="POST" enctype="multipart/form-data"> -->
+	<form:form modelAttribute="productVO" method="POST" enctype="multipart/form-data">
+	
 		
-		<div class="row mb-3">
-		<div class="form-check">
+		<!-- <div>Name<input type="text" name="productName"id="productName"></div> -->
+		<div>Name <form:input path="productName" id="productName"/></div>
+		<div>
+			<form:errors path="productName"></form:errors>
+		</div>
+		
+		<!-- <div>Price<input type="text" name="productPrice" id="productPrice"></div> -->
+		<div>Price <form:input path="productPrice" id="productPrice"/></div>
+		<div>
+			<form:errors path="productPrice"></form:errors>
+		</div>
+		
+		<!-- <div>Count<input type="text" name="productCount" id="productCount"></div> -->
+		<div>Count <form:input path="productCount"/></div>
+		<div>
+			<form:errors path="productCount"></form:errors>
+		</div>		
+		
+		<!-- Detail<textarea rows="" cols="" name="productDetail" id="productDetail"></textarea> -->
+		<div>Detail <form:textarea path="productDetail" id="productDetail"/></div>
+		<div>
+			<form:errors path="productDetail"></form:errors>
+		</div>
+		
+		<!-- <div class="row mb-3">
+			<div class="form-check">
 			  <input class="form-check-input sale" type="radio" value="1" name="sale" id="flexRadioDefault1">
 			  <label class="form-check-label" for="flexRadioDefault1">
 			    판매
@@ -48,14 +71,27 @@
 			    판매중지
 			  </label>
 			</div>
-		
 		</div>
+ -->		
+		
+		판매<form:radiobutton path="sale" id="flexRadioDefault1" value="1"/>
+		판매중지<form:radiobutton path="sale" id="flexRadioDefault2" value="0"/>
+		<div>
+			<form:errors path="sale"></form:errors>
+		</div>
+		
 		
 		<button id="fileAdd" type="button" class="btn btn-danger d-block">FileAdd</button>
 		<div id="fileResult"></div>
 		
-		<button id="add" type="button">작성하기</button>
-	</form>
+		<button id="add2" type="submit">작성하기</button>
+	
+	</form:form>
+	<!-- </form> -->
+	
+	
+	
+	
 	</div>
 	<script type="text/javascript" src="../resources/js/fileAdd.js"></script>
 	<script type="text/javascript" src="../js/summernote.js"></script>
