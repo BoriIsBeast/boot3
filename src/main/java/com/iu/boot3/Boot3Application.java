@@ -3,8 +3,10 @@ package com.iu.boot3;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
-//@EnableAspectJAutoProxy // 생략해도 되긴함 
+//@EnableAspectJAutoProxy // 생략해도 되긴함
+//@EnableScheduling
 @SpringBootApplication
 public class Boot3Application {
 

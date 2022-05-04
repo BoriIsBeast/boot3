@@ -1,5 +1,7 @@
 package com.iu.boot3.product;
 
+import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -8,7 +10,9 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -77,10 +81,12 @@ public class ProductController {
 	
 	@GetMapping("detail")
 	public ModelAndView getDetail(ProductVO productVO)throws Exception{
+		
 		//parameter productNum
 		//판매자가 보는 상세 페이지
+		System.out.println(productVO.getProductNum());
 		ModelAndView mv = new ModelAndView();
-		productVO = productService.getDetail(productVO);
+		productVO = productService.getDetail(productVO);//productNum=23
 		mv.addObject("vo", productVO);
 		mv.setViewName("product/detail");
 		return mv;
@@ -170,4 +176,38 @@ public class ProductController {
 			mv.setViewName("product/list");
 			return mv;
 		}
+		
+		//예외처리 메서드 +++++++++++++++++++++++++++++++++++
+//		@ExceptionHandler(BindException.class)
+//		public ModelAndView ex1() {
+//			ModelAndView mv = new ModelAndView();
+//			System.out.println("예외 발생 처리");
+//			mv.setViewName("error/error");
+//			return mv;
+//			
+//		}
+//		@ExceptionHandler(NullPointerException.class)
+//		public ModelAndView ex2() {
+//			ModelAndView mv = new ModelAndView();
+//			System.out.println("Nullpointer 예외 발생 처리");
+//			mv.setViewName("error/error");
+//			return mv;
+//			
+//		}
+//		@ExceptionHandler(Exception.class)// 익셉션의 상의 카테고리
+//		public ModelAndView ex3() {
+//			ModelAndView mv = new ModelAndView();
+//			System.out.println("Exception 예외 발생 처리");
+//			mv.setViewName("error/error");
+//			return mv;
+//			
+//		}
+//		@ExceptionHandler(Throwable.class)//최상위 부모
+//		public ModelAndView ex4() {
+//			ModelAndView mv = new ModelAndView();
+//			System.out.println("Throwable 예외 발생 처리");
+//			mv.setViewName("error/error");
+//			return mv;
+//			
+//		}
 }
